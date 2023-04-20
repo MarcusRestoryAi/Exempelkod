@@ -5,12 +5,15 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "startServer": "nodemon httpExample.js"
+    "startServer": "nodemon httpExample.js",
+    "startExpress": "nodemon expressServer.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.20.2",
+    "express": "^4.18.2",
     "nodemon": "^2.0.22"
   }
 }
