@@ -4,6 +4,9 @@ const bodyParser = require("body-parser")
 const app = new express();
 const portNr = 8081;
 
+const fs = require("fs");
+const jsonFilePath = "./data.json";
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
@@ -30,5 +33,18 @@ app.get("/about", (req, res) => {
 //Skapa en POST metod som returnerar body-data som en JSON string
 app.post("/", (req, res) => {
     let data = req.body;
-    res.send('Data Recieved: ' + JSON.stringify(data));
+
+    //Konvertera age till number
+    data.age = parseInt( data.age );
+
+    let jsonData = JSON.stringify(data, null, 2);
+    console.log(jsonData);
+
+    //Skriva JSON string till fil
+    fs.writeFile(jsonFilePath, jsonData, (err) => {
+        //Om error, skriv ut error
+        if (err) console.log(err);
+    });
+
+    res.send('Data Recieved: ' + jsonData);
 })
